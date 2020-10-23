@@ -11,6 +11,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
+using api.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace api
 {
     public class Startup
@@ -25,6 +28,8 @@ namespace api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<Context>(opt => opt.UseInMemoryDatabase("Database"));
+            services.AddScoped<Context, Context>();
             services.AddControllers();
         }
 
